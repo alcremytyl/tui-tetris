@@ -11,6 +11,7 @@ fn main() -> Result<(), io::Error> {
     tui::restore(&mut term)?;
 
     // TODO: test transforms here
+    // TODO: choose between enum and array for those tetridominoes
 
     Ok(())
 }

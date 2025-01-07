@@ -1,3 +1,5 @@
+use std::any::Any;
+
 use ratatui::style::Color;
 
 pub struct Tetridomino {
@@ -39,8 +41,24 @@ pub const SHAPES: [Tetridomino; 7] = [
 const ROT90: [[i8; 2]; 2] = [[0, -1], [1, 0]];
 const ROT270: [[i8; 2]; 2] = [[0, 1], [-1, 0]];
 
+pub enum Rotation {
+    LEFT,
+    RIGHT,
+}
+
 impl Tetridomino {
-    pub fn rotate(self) {
-        todo!();
+    pub fn rotate(self, rotation: Rotation) {
+        let transform = match rotation {
+            Rotation::LEFT => ROT270,
+            Rotation::RIGHT => ROT90,
+        };
+
+        // TODO: do something with this value
+
+        self.points
+            .iter()
+            .zip(transform.iter())
+            .map(|(arr1, arr2)| arr1.iter().zip(arr2).map(|(x, y)| x * y))
+            .collect();
     }
 }
